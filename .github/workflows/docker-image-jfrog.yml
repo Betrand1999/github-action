@@ -27,6 +27,9 @@ jobs:
           JFROG_USERNAME: ${{ secrets.JFROG_USERNAME }}
           JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }}
         run: |
+          echo "JFROG_URL=${JFROG_URL}"
+          echo "JFROG_USERNAME=${JFROG_USERNAME}"
+          echo "JFROG_PASSWORD=${JFROG_PASSWORD}"
           if [[ -z "$JFROG_URL" || -z "$JFROG_USERNAME" || -z "$JFROG_PASSWORD" ]]; then
             echo "JFROG_URL, JFROG_USERNAME, and JFROG_PASSWORD must be set"
             exit 1
