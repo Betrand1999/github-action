@@ -19,7 +19,7 @@ jobs:
       - name: Install JFrog CLI
         uses: jfrog/setup-jfrog-cli@v1
         with:
-          version: latest
+          version: 2.35.0  # Replace with the latest version
 
       - name: Configure JFrog CLI
         env:
