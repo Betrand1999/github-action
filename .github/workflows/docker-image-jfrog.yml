@@ -27,7 +27,7 @@ jobs:
           JFROG_USERNAME: ${{ secrets.JFROG_USERNAME }}
           JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }}
         run: |
-          jfrog rt config --interactive=false --url=$JFROG_URL --user=$JFROG_USERNAME --password=$JFROG_PASSWORD
+          jfrog config add my-server --interactive=false --url=$JFROG_URL --user=$JFROG_USERNAME --password=$JFROG_PASSWORD
 
       - name: Build Docker image
         run: docker build -t runner_image .
@@ -36,4 +36,4 @@ jobs:
         run: docker tag runner_image demo.jfrog.io/docker-local/runner_image:latest
 
       - name: Push Docker image to JFrog Artifactory
-        run: jfrog rt docker-push demo.jfrog.io/docker-local/runner_image:latest docker-local
+        run: jfrog rt docker-push runner_image:latest docker-local --server-id=my-server
