@@ -9,6 +9,8 @@ jobs:
    steps:
      - name: checkout repo 
        uses: actions/checkout@v2 
+     - name: run commabd
+       run: docker ps && docker --version 
      - name: login to docker 
        uses: docker/login-action@v3
        with:
