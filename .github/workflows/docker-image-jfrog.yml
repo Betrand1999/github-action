@@ -7,7 +7,7 @@ on:
 
 jobs:
   infra-dev-dryrun:
-    if: github.event_name != 'push' || '' == 'True' || '' == 'True'
+    #if: github.event_name != 'push' || '' == 'True' || '' == 'True'
     permissions: write-all
     runs-on: ubuntu-latest
     container:
