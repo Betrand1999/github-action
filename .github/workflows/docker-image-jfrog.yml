@@ -1,4 +1,4 @@
-name: CICD BUILD AND PUSH DOCKER IMAGE 
+name: CICD BUILD AND RUN CUSTOM DOCKER IMAGE 
 
 on:
   push:
@@ -6,21 +6,27 @@ on:
       - main
 
 jobs:
-  build:
+  infra-dev-dryrun:
+    if: github.event_name != 'push' || '' == 'True' || '' == 'True'
+    permissions: write-all
     runs-on: ubuntu-latest
-
+    container:
+      image: betrand1997/nginx
+      credentials:
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}  
+        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}  
+      options: "--user root"
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-
       - name: Run command
         run: docker ps && docker --version
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: Pull image
         run: docker pull nginx
