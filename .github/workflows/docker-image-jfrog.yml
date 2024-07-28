@@ -22,4 +22,3 @@ jobs:
        run: docker tag nginx:latest betrand1997/nginx:latest 
      - name: push image 
        run: docker push betrand1997/nginx:latest 
-#
