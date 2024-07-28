@@ -1,46 +1,24 @@
-name: Build and Push Docker Image to JFrog Artifactory
-
+name: CICD BUILD AND PUSH DOCKER IMAGE 
 on:
-  push:
-    branches:
-      - main
-
+ push:
+   branches:
+     - main
 jobs:
   build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Install JFrog CLI
-        uses: jfrog/setup-jfrog-cli@v1
-        with:
-          version: 2.35.0  # Replace with the latest version
-
-      - name: Configure JFrog CLI
-        env:
-          JFROG_URL: ${{ secrets.JFROG_URL }}
-          JFROG_USERNAME: ${{ secrets.JFROG_USERNAME }}
-          JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }}
-        run: |
-          echo "JFROG_URL=${JFROG_URL}"
-          echo "JFROG_USERNAME=${JFROG_USERNAME}"
-          echo "JFROG_PASSWORD=${JFROG_PASSWORD}"
-          if [[ -z "$JFROG_URL" || -z "$JFROG_USERNAME" || -z "$JFROG_PASSWORD" ]]; then
-            echo "JFROG_URL, JFROG_USERNAME, and JFROG_PASSWORD must be set"
-            exit 1
-          fi
-          jfrog config add my-server --interactive=false --url=$JFROG_URL --user=$JFROG_USERNAME --password=$JFROG_PASSWORD
-
-      - name: Build Docker image
-        run: docker build -t runner_image .
-
-      - name: Tag Docker image
-        run: docker tag runner_image demo.jfrog.io/docker-local/runner_image:latest
-
-      - name: Push Docker image to JFrog Artifactory
-        run: jfrog rt docker-push demo.jfrog.io/docker-local/runner_image:latest docker-local --server-id=my-server
+   runs-on: ubuntun-latest
+   steps:
+     - name: checkout repo 
+       uses: actions/checkout@v2 
+     - name: login to docker 
+       run: docker/login@v2
+       with:
+         username: ${secrets.DOCKER_USERNAME}
+         password: ${{secrets.DOCKER_PASSWORD}}
+     - name: pull image 
+       run: docker pull nginx 
+     - name: run image 
+       run: docker run -d -p 8080:90 --name my_container nginx 
+     - name: tag image 
+       run: docker tag nginx:latest betrand1997/nginx:latest 
+     - name: push image 
+       run: docker push betrand1997/nginx:latest 
