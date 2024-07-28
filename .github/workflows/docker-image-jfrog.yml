@@ -1,26 +1,35 @@
 name: CICD BUILD AND PUSH DOCKER IMAGE 
+
 on:
- push:
-   branches:
-     - main
+  push:
+    branches:
+      - main
+
 jobs:
   build:
-   runs-on: ubuntu-latest
-   steps:
-     - name: checkout repo 
-       uses: actions/checkout@v2 
-     - name: run commabd
-       run: docker ps && docker --version 
-     - name: login to docker 
-       uses: docker/login-action@v3
-       with:
-          username: ${secrets.DOCKER_USERNAME}
-          password: ${{secrets.DOCKER_PASSWORD}}
-     - name: pull image 
-       run: docker pull nginx 
-     - name: run image 
-       run: docker run -d -p 8080:90 --name my_container nginx 
-     - name: tag image 
-       run: docker tag nginx:latest betrand1997/nginx:latest 
-     - name: push image 
-       run: docker push betrand1997/nginx:latest #
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Run command
+        run: docker ps && docker --version
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Pull image
+        run: docker pull nginx
+
+      - name: Run image
+        run: docker run -d -p 8080:90 --name my_container nginx
+
+      - name: Tag image
+        run: docker tag nginx:latest betrand1997/nginx:latest
+
+      - name: Push image
+        run: docker push betrand1997/nginx:latest
