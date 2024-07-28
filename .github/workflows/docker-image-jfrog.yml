@@ -5,7 +5,7 @@ on:
      - main
 jobs:
   build:
-   runs-on: ubuntun-latest
+   runs-on: ubuntu-latest
    steps:
      - name: checkout repo 
        uses: actions/checkout@v2 
