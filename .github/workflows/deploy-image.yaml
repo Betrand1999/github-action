@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: linux-runner
+    runs-on: self-hosted
     container:
      image: betrand1997/httpd
 
