@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: self-hosted
     container:
-     image: betrand1997/hello-world
+     image: betrand1997/httpd
 
 
     steps:
