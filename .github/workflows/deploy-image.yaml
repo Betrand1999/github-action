@@ -9,11 +9,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: betrand1997/github-action-images-with-dependencies          # docker:latest
+      image: betrand1997/github-action-images-with-dependencies
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Build Docker image
-        run: docker build -t app .
+        run: docker build -t betrand1997/app:latest .
+
+      - name: Tag Docker image
+        run: docker tag betrand1997/app:latest betrand1997/app:latest
+
+      - name: Login to Docker Hub
+        run: echo "$DOCKER_PASSWORD" | docker login -u betrand1997 --password-stdin
+        env:
+          DOCKER_PASSWORD: "Cameroon@10K"
+
+      - name: Push Docker image
+        run: docker push betrand1997/app:latest
