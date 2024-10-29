@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: docker:latest
+      image: betrand1997/github-action-images-with-dependencies          # docker:latest
 
     steps:
       - name: Checkout repository
