@@ -17,8 +17,4 @@ jobs:
       - name: Build Docker image
         run: docker build -t app .
 
-      - name: Cleanup Docker containers
-        if: always()  # Ensures this runs even if the previous steps fail
-        run: |
-          docker ps -q | xargs -r docker stop
-          docker ps -a -q | xargs -r docker rm
+    
