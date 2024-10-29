@@ -10,7 +10,6 @@ jobs:
     runs-on: self-hosted
     container:
       image: betrand1997/github-action-images-with-dependencies
-      options: --network bridge  # Specify network option if needed
 
     steps:
       - name: Checkout repository
@@ -18,3 +17,9 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t app .
+
+      - name: Cleanup Docker containers
+        if: always()  # Ensures this runs even if the previous steps fail
+        run: |
+          docker ps -q | xargs -r docker stop
+          docker ps -a -q | xargs -r docker rm
