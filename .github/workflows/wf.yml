@@ -1,24 +1,32 @@
-name: Run commans
+name: Run Commands
+
 on:
- push:
-   branches:
-     - main 
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Choose environment to run in'
+        required: true
+        default: dev
+        type: choice
+        options:
+          - dev
+          - staging
+          - production
 
 jobs:
   command-job:
-   runs-on: self-hosted
-   environment: dev
-   steps:
-     - name: Run action to check repo
-       uses: actions/checkout@v4
-     - name: Run command 
-       run: echo "Hello world "
-     - name: Run multi commands 
-       run: |
-         echo "Hello man "
-         echo "Hello man "
-         echo "Hello man "
-         echo "Hello man "
+    runs-on: self-hosted
+    environment: ${{ inputs.environment }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
+      - name: Run command 
+        run: echo "Hello world"
 
-       
+      - name: Run multi commands 
+        run: |
+          echo "Hello man"
+          echo "Hello man"
+          echo "Hello man"
+          echo "Hello man"
