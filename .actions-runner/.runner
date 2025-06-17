@@ -1,0 +1,11 @@
+﻿{
+  "agentId": 2,
+  "agentName": "self-hosted",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelinesghubeus13.actions.githubusercontent.com/UNAX1xrxcqWJtZEpyEJqZ25UWRp59Oz1Incp1amtV9JKocDsws/",
+  "gitHubUrl": "https://github.com/Betrand1999/github-action",
+  "workFolder": "_work",
+  "useV2Flow": true,
+  "serverUrlV2": "https://broker.actions.githubusercontent.com/"
+}

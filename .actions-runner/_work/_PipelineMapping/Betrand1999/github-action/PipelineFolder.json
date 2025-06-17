@@ -1,0 +1,12 @@
+﻿{
+  "repositoryName": "Betrand1999/github-action",
+  "pipelineDirectory": "github-action",
+  "workspaceDirectory": "github-action/github-action",
+  "repositories": {
+    "Betrand1999/github-action": {
+      "repositoryPath": "github-action/github-action",
+      "lastRunOn": "06/17/2025 09:38:53 -04:00"
+    }
+  },
+  "lastRunOn": "06/17/2025 09:43:08 -04:00"
+}
