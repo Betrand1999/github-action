@@ -14,7 +14,7 @@ on:
           - production
 
 jobs:
-  command-job:
+  dev-run-job:
     runs-on: self-hosted
     environment: ${{ inputs.environment }}
     steps:
